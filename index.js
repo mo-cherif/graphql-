@@ -8,9 +8,19 @@ const typeDefs = gql`
         id: ID!
         date: String!
         moutain: String!
+        conditions: Conditions
     }
+
+    enum Conditions {
+        POWDER
+        HEAVY
+        ICE
+        THIN
+    }
+
     type Query {
         totalDays: Int!
+        allDays: [SkiDay!]!
     }
 `;
 
