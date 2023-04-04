@@ -22,6 +22,11 @@ const typeDefs = gql`
         totalDays: Int!
         allDays: [SkiDay!]!
     }
+
+    type Mutation {
+        removeDay(id: ID!): SkiDay!
+        
+    }
 `;
 
 // creating appolo server here
