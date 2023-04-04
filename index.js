@@ -1,4 +1,4 @@
-const {ApolloServer, gql} = require("apollo-server");
+const {ApolloServer, gql,MockList} = require("apollo-server");
 
 
 // our type definitions
@@ -25,6 +25,13 @@ const typeDefs = gql`
         allDays: [SkiDay!]!
     }
 
+    type removeDayPayload {
+        day: SkiDay!
+        removed: Boolean
+        totalBefore: Int
+        totalAfter: Int
+    }
+
     input AddDayInput {
         date: Date!
         mountain: String!
@@ -32,18 +39,23 @@ const typeDefs = gql`
     }
     type Mutation {
         addDay(input: AddDayInput!): SkiDay
-        removeDay(id: ID!): SkiDay!
+        removeDay(id: ID!): removeDayPayload!
 
     }
 `;
 
+const mocks = {
+    Date: () => "1/11/2003",
+    String: () => "❤️",
+}
+
 // creating appolo server here
 const server = new ApolloServer ({
     typeDefs,
-    mocks: true
+    mocks
 });
 
 // listen 
 server.listen().then(({url}) => {
     console.log(`server is running ${url}`);
-});
+}); 
