@@ -3,6 +3,12 @@ const {ApolloServer, gql} = require("apollo-server");
 
 // our type definitions
 const typeDefs = gql`
+
+    type SkiDay {
+        id: ID!
+        date: String!
+        moutain: String!
+    }
     type Query {
         totalDays: Int!
     }
